@@ -1,5 +1,5 @@
-import { emitWarning } from "process";
-import Users from "./models/user.js";
+
+import Users from "../models/user.js";
 
 export const getUsers = async (req, res) => {
     try {
@@ -39,3 +39,4 @@ export const postUser = async(req, res) => {
         res.status(500).json({success: false, message: "Server Error"});
     }
 }
+
