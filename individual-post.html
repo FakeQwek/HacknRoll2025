@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunset Spot Details</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #fff5f0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .header-back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+            z-index: 2;
+        }
+
+        .main-image-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-overlay {
+            display: flexbox;
+            flex-direction: column;
+            margin-top: 5px;
+        }
+
+        .spot-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .info-tag {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+            justify-content: space-between;
+        }
+
+        .tag {
+            background-color: #FFD1A3;
+            padding: 5px 15px;
+            border-radius: 44px;
+            font-size: 19px;
+            border: 1px solid #000;
+        }
+
+        .tag-text {
+            color: #000;
+            font-weight: 600;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .info-section {
+            margin-bottom: 20px;
+        }
+
+        .info-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 20px;
+            border: none;
+            background-color: #ffe4d4;
+            color: #333;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .review-text {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .rating {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        .review-count {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .user-reviews {
+            margin-top: 20px;
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .username {
+            font-weight: 500;
+            color: #666;
+        }
+
+        .review-images {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .review-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .directions-button {
+            background-color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-back">
+        <a href="#" class="back-button">←</a>
+    </div>
+    <div class="header">
+        
+        
+        <div class="main-image-container">
+            <img src="./src/images/sunset1.JPG" alt="Sunset at MacRitchie" class="main-image">
+        </div>
+        <div class="image-overlay">
+            <div class="info-tag">
+                <span class="tag">📍 MacRitchie Reservoir Park</span>
+                <span class="tag tag-text" >5.0 ⭐</span>
+            </div>
+            <div class="info-tag">
+                <span class="tag">Central</span>
+                <span class="tag-text">@tbh.neha</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="info-section">
+            <div class="info-header">
+                <div>Real Time Updates</div>
+                <div>Drizzling 🌧️</div>
+            </div>
+            <div>Sunset in 45 minutes</div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="button">🔖 Rate</button>
+            <button class="button directions-button">📍 Directions</button>
+        </div>
+
+        <div class="review-text">
+            <p>amazing golden hour views at this nature spot 🌅🌲</p>
+            <p>as a sunset girlie, i literally fall in love with the little moments where i'm appreciating the sky painted in front of me 🌅</p>
+            <p>there are multiple ways that you can get here because the park has different entrances! but the best place to view the sunset is along the boardwalk that surrounds the water body in the middle.</p>
+            <p>to be more specific, you can head to the area called 'MacRitchie Reservoir View Point' as seen in pic number 2.</p>
+        </div>
+
+        <div class="rating-section">
+            <div class="rating">5.0 ⭐</div>
+            <div class="review-count">(50)</div>
+        </div>
+
+        <div class="user-reviews">
+            <h3>See others' rating 👀</h3>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <span class="username">@qwektsunyang</span>
+                    <span>⭐⭐⭐⭐⭐</span>
+                </div>
+                <p>Direction was useful and the spot is wonderful, highly encourage everyone to go 👍👍👍</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <span class="username">@lolzzzyeeyee</span>
+                    <span>⭐⭐⭐⭐⭐</span>
+                </div>
+                <p>Enjoyed this tranquil walk. Amazing guide to this sunset spot in Singapore. Loved this.</p>
+                <div class="review-images">
+                    <img src="/api/placeholder/100/100" alt="Review image 1" class="review-image">
+                    <img src="/api/placeholder/100/100" alt="Review image 2" class="review-image">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

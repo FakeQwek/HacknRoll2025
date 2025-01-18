@@ -98,6 +98,7 @@
             background-color: white;
             border-top: 1px solid #e0e0e0;
             margin-top: 50px;
+            border-radius: 15px;
         }
 
         .navbar-icon {
@@ -131,6 +132,17 @@
         #last {
             margin-bottom: 20%;
         }
+        #map-icon {
+            margin-left: 40%;
+        }
+        #location-icon {
+            margin-left: -5%;
+        }
+        .navbar-icon:hover {
+            opacity: 50%;
+            cursor:pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -213,11 +225,12 @@
         </div>
     </div>
     <div class="navbar">
-        <div class="navbar-icon">🏠</div>
-        <div class="navbar-icon plus-icon">➕</div>
-        <div class="navbar-icon">🗺️</div>
-        <div class="navbar-icon">👤</div>
+        <div class="navbar-icon" id="home-icon">🏠</div>
+        <div class="navbar-icon plus-icon" id="plus-icon">➕</div>
+        <div class="navbar-icon" id="map-icon">🗺️</div>
+        <div class="navbar-icon" id="location-icon">📍</div>
     </div>
     <script src="./src/scripts/home.js"></script>
+    <script src="./src/scripts/navbar.js"></script>
 </body>
 </html>

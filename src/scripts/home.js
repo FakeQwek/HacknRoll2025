@@ -2,6 +2,7 @@ let timeElement = document.getElementById('time-value');
 let tempElement = document.getElementById('temp-value');
 let weatherElement = document.getElementById('weather-value');
 let weatherIcon = document.getElementById('weather-icon');
+
 console.log(weatherIcon);
 fetch("https://api.sunrisesunset.io/json?lat=1.3106&lng=103.866")
 .then((response) => response.json())
