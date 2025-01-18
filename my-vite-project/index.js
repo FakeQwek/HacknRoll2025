@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import { error } from 'console';
 
 const app = express();
 dotenv.config();
@@ -19,7 +20,7 @@ mongoose.connect(`mongodb+srv://${process.env.MONGOCRED}@database.i7urz.mongodb.
         });
 
 })
-.catch(() => {
-        console.log("Connection unsuccessful!");
+.catch((error) => {
+        console.log("Connection unsuccessful!", error);
 });
 

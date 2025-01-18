@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          background-color: white;
+      }
+
+      .login-container {
+          width: 100%;
+          max-width: 400px;
+          padding: 20px;
+      }
+
+      h1 {
+          color: #4a154b;
+          text-align: center;
+          margin-bottom: 30px;
+          font-size: 32px;
+      }
+
+      .form-group {
+          margin-bottom: 20px;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+          width: 100%;
+          padding: 15px;
+          border: 1px solid #ddd;
+          border-radius: 25px;
+          font-size: 16px;
+          outline: none;
+      }
+
+      input[type="text"]:focus,
+      input[type="password"]:focus {
+          border-color: #4a154b;
+      }
+
+      .remember-me {
+          display: flex;
+          align-items: center;
+          margin-bottom: 20px;
+          color: #666;
+      }
+
+      .remember-me input[type="checkbox"] {
+          margin-right: 10px;
+          width: 18px;
+          height: 18px;
+          accent-color: #4a154b;
+      }
+
+      .login-button {
+          width: 100%;
+          padding: 15px;
+          background-color: #4a154b;
+          color: white;
+          border: none;
+          border-radius: 25px;
+          font-size: 16px;
+          cursor: pointer;
+          margin-bottom: 20px;
+      }
+
+      .login-button:hover {
+          background-color: #3e1240;
+      }
+
+      .divider {
+          display: flex;
+          align-items: center;
+          text-align: center;
+          margin: 20px 0;
+          color: #666;
+      }
+
+      .divider::before,
+      .divider::after {
+          content: "";
+          flex: 1;
+          border-bottom: 1px solid #ddd;
+      }
+
+      .divider span {
+          padding: 0 10px;
+      }
+
+      .forgot-password {
+          text-align: center;
+          margin-bottom: 20px;
+      }
+
+      .forgot-password a {
+          color: #666;
+          text-decoration: none;
+      }
+
+      .social-login {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-bottom: 20px;
+      }
+
+      .social-icon {
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background-color: #f5f5f5;
+          cursor: pointer;
+      }
+
+      .sign-up {
+          text-align: center;
+          color: #666;
+      }
+
+      .sign-up a {
+          color: #4a154b;
+          text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h1>Welcome!</h1>
+      <form>
+        <div class="form-group">
+            <input type="text" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input type="password" placeholder="Password">
+        </div>
+        <div class="remember-me">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember Me</label>
+        </div>
+        <button type="submit" class="login-button">Login</button>
+        <div class="divider">
+            <span>Or</span>
+        </div>
+        <div class="forgot-password">
+            <a href="#">Forgot Password?</a>
+        </div>
+        <div class="social-login">
+            <div class="social-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="#4267B2" d="M12 0C5.373 0 0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 22.954 24 17.99 24 12c0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </div>
+            <div class="social-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="#DB4437" d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12c6.627 0 12-5.373 12-12S18.627 0 12 0zm.14 19.018c-3.868 0-7-3.14-7-7.018 0-3.878 3.132-7.018 7-7.018 1.89 0 3.47.697 4.682 1.829l-1.974 1.978c-.517-.556-1.437-1.201-2.708-1.201-2.31 0-4.187 1.933-4.187 4.412 0 2.48 1.877 4.412 4.187 4.412 2.688 0 3.693-1.931 3.847-2.931H12.14v-2.591h6.458c.064.375.117.75.117 1.25 0 4.007-2.68 6.878-6.575 6.878z"/>
+                </svg>
+            </div>
+            <div class="social-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="#000000" d="M12 0C5.373 0 0 5.373 0 12c0 6.016 4.432 10.984 10.206 11.852V15.18H7.237v-3.154h2.969V9.927c0-3.475 1.693-5 4.581-5 1.383 0 2.115.103 2.461.149v2.753h-1.97c-1.226 0-1.654 1.163-1.654 2.473v1.724h3.593l-.487 3.154h-3.106v8.697C19.481 23.083 24 18.075 24 12c0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="sign-up">
+            Don't have an account? <a href="#">Sign Up</a>
+        </div>
+      </form>
+    </div>
+  </body>
+  <!-- <script type="module" src="/index.js"></script> -->
+</html>

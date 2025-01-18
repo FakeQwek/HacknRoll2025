@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunset Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #fff5f0;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .current-info {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .info-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .info-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .info-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .info-label {
+            color: #666;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .sunset-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+        }
+
+        .sunset-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .sunset-info {
+            flex: 1;
+        }
+
+        .sunset-location {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .sunset-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .sunset-detail-value {
+            color: #ff6b35;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Welcome, Sze Kye! 👋
+    </div>
+
+    <div class="section-title">Today's Sunset Updates</div>
+    <div class="current-info">
+        <div class="info-box">
+            <div class="info-icon">🌞</div>
+            <div class="info-value">7.15PM</div>
+            <div class="info-label">Sunset Timing</div>
+        </div>
+        <div class="info-box">
+            <div class="info-icon">🌡️</div>
+            <div class="info-value">28°C</div>
+            <div class="info-label">Temperature</div>
+        </div>
+    </div>
+
+    <div class="section-title">Your Saved Sunset Spots 📸</div>
+    
+    <div class="sunset-card">
+        <img src="./src/img/sunset1.jpg" alt="MacRitchie Reservoir" class="sunset-image">
+        <div class="sunset-info">
+            <div class="sunset-location">MacRitchie Reservoir</div>
+            <div class="sunset-detail">
+                <span>Weather</span>
+                <span class="sunset-detail-value">Drizzling 🌧️</span>
+            </div>
+            <div class="sunset-detail">
+                <span>Cloud Cover</span>
+                <span class="sunset-detail-value">20%</span>
+            </div>
+            <div class="sunset-detail">
+                <span>Wind Speed</span>
+                <span class="sunset-detail-value">6km/h</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="sunset-card">
+        <img src="./src/img/sunset2.jpg" alt="Seletar Fishing Village" class="sunset-image">
+        <div class="sunset-info">
+            <div class="sunset-location">Seletar Fishing Village</div>
+            <div class="sunset-detail">
+                <span>Weather</span>
+                <span class="sunset-detail-value">Clear</span>
+            </div>
+            <div class="sunset-detail">
+                <span>Cloud Cover</span>
+                <span class="sunset-detail-value">5%</span>
+            </div>
+            <div class="sunset-detail">
+                <span>Wind Speed</span>
+                <span class="sunset-detail-value">15km/h</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="sunset-card">
+        <img src="./src/img/sunset3.jpg" alt="Clementi Avenue 6" class="sunset-image">
+        <div class="sunset-info">
+            <div class="sunset-location">Clementi Avenue 6 Block 106 L12</div>
+            <div class="sunset-detail">
+                <span>Weather</span>
+                <span class="sunset-detail-value">Clear</span>
+            </div>
+            <div class="sunset-detail">
+                <span>Cloud Cover</span>
+                <span class="sunset-detail-value">15%</span>
+            </div>
+            <div class="sunset-detail">
+                <span>Wind Speed</span>
+                <span class="sunset-detail-value">3km/h</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
