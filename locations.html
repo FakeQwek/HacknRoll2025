@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singapore Sunset Spots</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .map-container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .location-filter {
+            position: absolute;
+            top: 20px;
+            left: 60px;
+            z-index: 1000;
+            width: 250px;
+        }
+
+        .location-select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .custom-marker {
+            background-color: #ff4444;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border: 3px solid white;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .custom-marker:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Posts View */
+        .posts-container {
+            display: none;
+            padding: 20px;
+            background: #f8f8f8;
+            min-height: 100vh;
+        }
+
+        .location-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        .back-button {
+            padding: 8px 16px;
+            border: none;
+            background: #f0f0f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .post-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .post-content {
+            padding: 15px;
+        }
+
+        .post-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .post-author {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            color: #666;
+        }
+
+        .rating {
+            color: #ffd700;
+        }
+
+        .navbar {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #ddd;
+            z-index: 1000;
+        }
+
+        .navbar-icon {
+            padding: 8px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.2s;
+        }
+
+        .navbar .plus-icon {
+            position: relative;
+            top: -20px; /* Makes the button protrude upward */
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            
+        }
+
+        .nav-button.plus-button:hover {
+            background-color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .navbar-icon img {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="map-container" id="mapView">
+        <div id="map"></div>
+        <div class="location-filter">
+            <select class="location-select" id="locationFilter">
+                <option value="">All Locations</option>
+                <option value="holland">Holland Village</option>
+                <option value="queenstown">Queenstown</option>
+                <option value="buona-vista">Buona Vista</option>
+                <option value="clementi">Clementi</option>
+                <option value="skyville">SkyVille @ Dawson</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="posts-container" id="postsView">
+        <div class="location-header">
+            <button class="back-button" onclick="showMapView()">← Back</button>
+            <h2 id="locationTitle"></h2>
+        </div>
+        <div class="post-grid" id="postsGrid"></div>
+    </div>
+
+    <div class="navbar">
+        <div class="navbar-icon" id="home-icon">🏠</div>
+        <div class="navbar-icon" id="location-icon">📍</div>
+        <div class="navbar-icon plus-icon" id="plus-icon">➕</div>
+        <div class="navbar-icon" id="map-icon">🗺️</div>
+        <div class="navbar-icon">👤</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <script src="./src/scripts/navbar.js"></script>
+    <script>
+        // Combined location data
+        const mockPins = [
+            { id: 1, lat: 1.3109, lng: 103.7952, location: 'holland', postCount: 3 },
+            { id: 2, lat: 1.3000, lng: 103.7859, location: 'one-north', postCount: 5 },
+            { id: 3, lat: 1.3067, lng: 103.7905, location: 'buona-vista', postCount: 2 },
+            { id: 4, lat: 1.3162, lng: 103.7649, location: 'clementi', postCount: 4 },
+            { id: 5, lat: 1.2922, lng: 103.8128, location: 'skyville', postCount: 3 }
+        ];
+
+        // Mock posts for SkyVille@Dawson
+        const skyvillePosts = [
+            {
+                imageUrl: "./src/images/Dawson1.jpg",
+                title: "FREE sunset spot in a neighbourhood estate!!",
+                author: {
+                    handle: "@tbh.neha"
+                },
+                rating: 5.0
+            },
+            {
+                imageUrl: "./src/images/Dawson2.jpg",
+                title: "Where to take sunset photos in Singapore!",
+                author: {
+                    handle: "@petitethrifts"
+                },
+                rating: 4.7
+            },
+            {
+                imageUrl: "./src/images/Dawson3.jpg",
+                title: "Amazing golden hour views at this nature spot",
+                author: {
+                    handle: "@sunsetlover"
+                },
+                rating: 4.8
+            }
+        ];
+
+        // Initialize map
+        const map = L.map('map').setView([1.3088, 103.7775], 14);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        let markers = [];
+
+        function createCustomMarker(pin) {
+            const customIcon = L.divIcon({
+                className: 'custom-marker',
+                html: `<span>${pin.postCount}</span>`,
+                iconSize: [40, 40],
+                iconAnchor: [20, 20]
+            });
+
+            const marker = L.marker([pin.lat, pin.lng], { icon: customIcon });
+            
+            marker.on('click', () => {
+                if (pin.location === 'skyville') {
+                    showPostsView('SkyVille @ Dawson', skyvillePosts);
+                } else {
+                    // For other locations, you would fetch posts from MongoDB
+                    console.log(`Clicked location: ${pin.location}`);
+                }
+            });
+
+            return marker;
+        }
+
+        function renderPins(locationFilter = '') {
+            markers.forEach(marker => marker.remove());
+            markers = [];
+
+            const filteredPins = locationFilter
+                ? mockPins.filter(pin => pin.location === locationFilter)
+                : mockPins;
+
+            filteredPins.forEach(pin => {
+                const marker = createCustomMarker(pin);
+                marker.addTo(map);
+                markers.push(marker);
+            });
+
+            if (filteredPins.length > 0) {
+                const bounds = L.latLngBounds(filteredPins.map(pin => [pin.lat, pin.lng]));
+                map.fitBounds(bounds, { padding: [50, 50] });
+            } else {
+                map.setView([1.3088, 103.7775], 14);
+            }
+        }
+
+        function showPostsView(locationName, posts) {
+            document.getElementById('mapView').style.display = 'none';
+            document.getElementById('postsView').style.display = 'block';
+            document.getElementById('locationTitle').textContent = `📍 ${locationName}`;
+
+            const postsGrid = document.getElementById('postsGrid');
+            postsGrid.innerHTML = '';
+
+            posts.forEach(post => {
+                const postElement = createPostElement(post);
+                postsGrid.appendChild(postElement);
+            });
+        }
+
+        function showMapView() {
+            document.getElementById('mapView').style.display = 'block';
+            document.getElementById('postsView').style.display = 'none';
+            map.invalidateSize();
+        }
+
+        function createPostElement(post) {
+            const postDiv = document.createElement('div');
+            postDiv.className = 'post-card';
+            postDiv.innerHTML = `
+                <img src="${post.imageUrl}" alt="${post.title}" class="post-image">
+                <div class="post-content">
+                    <div class="post-title">${post.title}</div>
+                    <div class="post-author">
+                        <span>${post.author.handle}</span>
+                        <span class="rating">★ ${post.rating.toFixed(1)}</span>
+                    </div>
+                </div>
+            `;
+            return postDiv;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPins();
+
+            const locationFilter = document.getElementById('locationFilter');
+            locationFilter.addEventListener('change', (e) => {
+                renderPins(e.target.value);
+            });
+        });
+    </script>
+</body>
+</html>

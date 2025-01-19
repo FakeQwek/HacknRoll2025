@@ -87,64 +87,67 @@
             font-size: 1.2em;
             vertical-align: middle;
         }
+        
         .navbar {
-            bottom: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            position: sticky;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
             background-color: white;
-            border-top: 1px solid #e0e0e0;
-            margin-top: 50px;
-            border-radius: 15px;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
         }
-
         .navbar-icon {
+            padding: 8px;
             font-size: 24px;
-            color: black;
-            flex: 1;
-            text-align: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.2s;
         }
 
         .navbar .plus-icon {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: white;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative;
+            top: -20px; /* Makes the button protrude upward */
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
             border-radius: 50%;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            
         }
 
-        .navbar .plus-icon svg {
-            width: 30px;
-            height: 30px;
+        .nav-button.plus-button:hover {
+            background-color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .navbar-icon img {
+            width: 24px;
+            height: 24px;
         }
 
         #last {
             margin-bottom: 20%;
         }
-        #map-icon {
-            margin-left: 40%;
-        }
-        #location-icon {
-            margin-left: -5%;
-        }
+        
         #region-selector {
             display: flex;
             justify-content: space-around;
         }
-        .navbar-icon:hover {
-            opacity: 50%;
-            cursor:pointer;
-        }
+        
         .location-container {
             display: flex;
             flex-direction: row;
@@ -175,9 +178,10 @@
    
     <div class="navbar">
         <div class="navbar-icon" id="home-icon">🏠</div>
+        <div class="navbar-icon" id="location-icon">📍</div>
         <div class="navbar-icon plus-icon" id="plus-icon">➕</div>
         <div class="navbar-icon" id="map-icon">🗺️</div>
-        <div class="navbar-icon" id="location-icon">📍</div>
+        <div class="navbar-icon">👤</div>
     </div>
     <script src="./src/scripts/posts.js"></script>
     <script src="./src/scripts/navbar.js"></script>
