@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunset Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        body {
+            background-color: #fff5f0;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            margin-top: 20px;
+        }
+        .current-info {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .info-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .info-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .info-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .info-label {
+            color: #666;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .sunset-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+        }
+        .sunset-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .sunset-info {
+            flex: 1;
+        }
+        .sunset-location {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .sunset-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        .sunset-detail-value {
+            color: #ff6b35;
+        }
+        .emoji {
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+        .navbar {
+            bottom: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            position: sticky;
+            background-color: white;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 50px;
+            border-radius: 15px;
+        }
+
+        .navbar-icon {
+            font-size: 24px;
+            color: black;
+            flex: 1;
+            text-align: center;
+        }
+
+        .navbar .plus-icon {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar .plus-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        #last {
+            margin-bottom: 20%;
+        }
+        #region-selector {
+            display: flex;
+            justify-content: space-around;
+        }
+        .navbar-icon:hover {
+            opacity: 50%;
+            cursor:pointer;
+        }
+        .location-container {
+            display: flex;
+            flex-direction: row;
+        }
+        .post-container {
+            display: row;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+        .thumbnail-cover {
+            height: 100%;
+        }
+        #create-post-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #header-selectors {
+            display: flex;
+            margin-top: 5%;
+
+        }
+        #location-region-container {
+            display: flex;
+            flex-direction: column;
+
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .image-upload-graphic {
+            border: 2px solid black;
+            padding: 80px 40px 80px 40px;
+            cursor:pointer;
+            border-radius: 10px;
+            background-color: rgb(247, 247, 247);
+        }
+        .input-field {
+            margin-left: 20px;
+            border-radius: 15px;
+            padding: 5px;
+            margin-top: 9px;
+        }
+        #thumbnail-text {
+            font-size: small;
+        }
+        #location-field {
+            width: 250px;
+            height: 50px;
+            border-radius: 30px;
+            background-color: rgb(255, 205, 111);
+            padding-left:15px;
+        }
+        #region-field {
+            width: 140px;
+            height: 50px;
+            border-radius: 30px;
+            background-color: rgb(255, 205, 111);
+            padding-left: 15px;
+        }
+        #heading-field {
+            border-radius: 7px;
+            width: 460px;
+            height: 50px;
+            border-radius:15px;
+            margin-top: 15px;
+            padding-left: 10px;
+        }
+        #description-field {
+            width: 460px;
+            height: 180px;
+            border-radius:15px;
+            margin-top: 15px;
+            padding-top: 15px;
+            padding-left: 7px;
+        }
+        #images-upload {
+            margin: 30px 290px 0 5px;
+            padding: 80px 50px 80px 50px;
+        }
+        #next-button {
+            padding: 5px 20px 5px 20px;
+            border-radius: 10px;
+            margin-left: 70%;
+            background-color:rgb(255, 205, 111);
+        }
+        #headed {
+            margin-top: 9%;
+            margin-bottom: 5%;
+        }
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .navbar-icon {
+            padding: 8px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.2s;
+        }
+
+        .navbar .plus-icon {
+
+            top: -20px; /* Makes the button protrude upward */
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            
+        }
+
+        .nav-button.plus-button:hover {
+            background-color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .navbar-icon img {
+            width: 24px;
+            height: 24px;
+        }
+        #next-button {
+            margin-bottom: 20%;
+        }
+
+    </style>
+</head>
+<body>
+    <section id="create-post-container">
+        <h2 id="headed">Create a Post</h2>
+        <div id="header-selectors">
+            <label for="image-upload" class="image-upload-graphic">
+                <p id="thumbnail-text">Upload Thumbnail<br></p>
+                <input type="file" id="image-upload" accept=".jpg .jpeg .png">
+            </label>
+            <div id="location-region-container">
+                <label for="location-field">
+                    <input type="text" class="input-field" id="location-field" placeholder="                  📍Location">
+                </label>
+                <label for="region-field">
+                    <input type="text" class="input-field" id="region-field" placeholder="         Region">
+                </label>
+            </div>    
+        </div>
+        <input type="text" id="heading-field" placeholder="     Type your heading">
+        <textarea id="description-field">  </textarea>
+        <label for="image-upload" class="image-upload-graphic" id="images-upload">
+            <p id="thumbnail-text">  Upload Images  <br></p>
+            <input type="file" id="image-upload" accept=".jpg .jpeg .png" multiple>
+        </label>
+        <button id="next-button">Submit</button>
+    </section>
+    
+    <div class="navbar">
+        <div class="navbar-icon" id="home-icon">🏠</div>
+        <div class="navbar-icon" id="location-icon">📍</div>
+        <div class="navbar-icon plus-icon" id="plus-icon">➕</div>
+        <div class="navbar-icon" id="map-icon">🗺️</div>
+        <div class="navbar-icon">👤</div>
+    </div>
+
+    <script src="./src/scripts/post.js"></script>
+    <script src="./src/scripts/navbar.js"></script>
+</body>
+</html>
