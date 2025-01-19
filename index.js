@@ -19,7 +19,7 @@ mongoose.connect(`mongodb+srv://${process.env.MONGOCRED}@database.i7urz.mongodb.
         });
 
 })
-.catch(() => {
-        console.log("Connection unsuccessful!");
+.catch((error) => {
+        console.log("Connection unsuccessful!", error);
 });
 
