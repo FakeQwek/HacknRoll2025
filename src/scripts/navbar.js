@@ -19,7 +19,7 @@ homeIcon.addEventListener("click", () => {
 });
 
 plusIcon.addEventListener("click", () => {
-    window.location.assign("./home.html");
+    window.location.assign("./post.html");
     console.log("plus");
 });
 console.log("How about here");

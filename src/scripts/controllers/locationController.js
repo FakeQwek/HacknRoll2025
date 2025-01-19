@@ -32,9 +32,11 @@ export const postLocation = async(req, res) => {
     const author = req.body.author;
     const rating = req.body.rating;
     const region = req.body.region;
+    const image = req.body.region;
+    console.log(title + " " + description + " " + author + " " + rating + " " + region);
 
     try {
-        const location = await Locations.insertOne({
+        const location = await Locations.create({
             Title: title,
             Description: description,
             Author: author,
@@ -45,6 +47,7 @@ export const postLocation = async(req, res) => {
         res.status(200).json({success: true, data: location});
     }
     catch(error) {
+        console.log(title + " " + description + " " + author + " " + rating + " " + region);
         res.status(500).json({success: false, message: "Server Error"});
     }
 }

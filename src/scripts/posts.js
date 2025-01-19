@@ -71,7 +71,7 @@ async function getLocationByRegion(region) {
             for (let i = 0; i < body['data'].length; i++) {
                 let entry = body['data'][i];
                 console.log(entry);
-
+                
                 // Dynamically generate the HTML
                 posts.insertAdjacentHTML('beforeend', `
                     <div class="post-container" style="border: 1px solid #ccc; border-radius: 10px; width: 250px; margin: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">

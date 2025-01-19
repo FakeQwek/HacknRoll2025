@@ -25,7 +25,8 @@ const LocationSchema = mongoose.Schema(
         Region: {
             type: String,
             required: true,
-        }
+        },
+        
     }, {
         timestamps: true,
         collection: 'Location'
