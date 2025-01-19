@@ -3,168 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunset Spot Details</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
-            background-color: #fff5f0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
             max-width: 600px;
             margin: 0 auto;
-        }
-
-        .header {
+            background: white;
+            min-height: 100vh;
             position: relative;
-            margin-bottom: 20px;
+            padding-bottom: 80px; /* Space for sticky nav */
         }
 
-        .header-back {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-        }
-
-        .back-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: white;
-            font-size: 24px;
-            text-decoration: none;
-            z-index: 2;
-        }
-
-        .main-image-container {
+        /* Carousel */
+        .carousel {
             position: relative;
             width: 100%;
-            height: 400px;
+            height: 300px;
             overflow: hidden;
-            border-radius: 0 0 20px 20px;
         }
 
-        .main-image {
+        .carousel-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .image-overlay {
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%);
+            color: white;
+        }
+
+        .back-button {
+            font-size: 24px;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Location Info */
+        .location-info {
+            padding: 15px;
             display: flexbox;
             flex-direction: column;
-            margin-top: 5px;
         }
 
-        .spot-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .info-tag {
+        .location-header {
             display: flex;
             align-items: center;
-            gap: 5px;
-            margin-bottom: 10px;
-            justify-content: space-between;
-        }
-
-        .tag {
-            background-color: #FFD1A3;
-            padding: 5px 15px;
-            border-radius: 44px;
-            font-size: 19px;
-            border: 1px solid #000;
-        }
-
-        .tag-text {
-            color: #000;
-            font-weight: 600;
-        }
-
-        .content {
-            padding: 20px;
-        }
-
-        .info-section {
-            margin-bottom: 20px;
-        }
-
-        .info-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            color: #666;
-        }
-
-        .action-buttons {
-            display: flex;
+            margin-bottom: 15px;
             gap: 10px;
-            margin-bottom: 20px;
         }
 
-        .button {
-            flex: 1;
-            padding: 12px;
+        .location-name {
+            background: #FFE4C4;
+            padding: 8px 15px;
             border-radius: 20px;
-            border: none;
-            background-color: #ffe4d4;
-            color: #333;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            cursor: pointer;
-        }
-
-        .review-text {
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .rating-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
         }
 
         .rating {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ff6b35;
+            color: #FF9500;
         }
 
-        .review-count {
-            color: #666;
-            font-size: 14px;
-        }
-
-        .user-reviews {
-            margin-top: 20px;
-        }
-
-        .review-card {
-            background: white;
+        .location-tag {
+            background: #FFE4C4;
+            padding: 4px 12px;
             border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 15px;
+            font-size: 0.9em;
         }
 
-        .review-header {
+        /* Updates Section */
+        .updates-section {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .weather-update {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-top: 10px;
+            font-size: 20px;
         }
 
-        .username {
-            font-weight: 500;
-            color: #666;
+        /* Reviews Section */
+        .reviews-section {
+            padding: 15px;
+        }
+
+        .review {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
         }
 
         .review-images {
@@ -176,85 +121,146 @@
         .review-image {
             width: 100px;
             height: 100px;
-            border-radius: 10px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Sticky Navigation */
+        .sticky-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #eee;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid #eee;
+            background: white;
+            cursor: pointer;
+        }
+
+        /* Suggestions Section */
+        .suggestions {
+            padding: 15px;
+        }
+
+        .suggestion-cards {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+
+        .suggestion-card {
+            max-width: 50%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .suggestion-image {
+            width: 100%;
             object-fit: cover;
         }
 
-        .directions-button {
-            background-color: #ffd700;
+        .suggestion-info {
+            padding: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="header-back">
-        <a href="#" class="back-button">←</a>
-    </div>
-    <div class="header">
-        
-        
-        <div class="main-image-container">
-            <img src="./src/images/sunset1.JPG" alt="Sunset at MacRitchie" class="main-image">
+    <div class="container">
+        <!-- Image Carousel -->
+        <div class="carousel-overlay">
+            <a href="#" class="back-button">←</a>
         </div>
-        <div class="image-overlay">
-            <div class="info-tag">
-                <span class="tag">📍 MacRitchie Reservoir Park</span>
-                <span class="tag tag-text" >5.0 ⭐</span>
+        <div class="carousel">
+            <img src="./src/images/sunset1.JPG" alt="Sunset at MacRitchie Reservoir" class="carousel-image">
+        </div>
+
+        <!-- Location Info -->
+        <div class="location-info">
+            <div class="location-header">
+                <span class="location-name">📍 MacRitchie Reservoir Park</span>
+                <span class="rating">5.0 ⭐</span>
             </div>
-            <div class="info-tag">
-                <span class="tag">Central</span>
-                <span class="tag-text">@tbh.neha</span>
+            <span class="location-tag">Central</span>
+            <span>@tbh.neha</span>
+        </div>
+
+        <!-- Real-time Updates -->
+        <div class="updates-section">
+            <h3 style="font-size: 23px; font-weight: 700;">Real Time Updates</h3>
+            <div>
+                <span style="color: #D5682F; font-size: 20px; display: flex; text-align: center; width: 100%;">Sunset in 45 minutes</span>
+            </div>
+            <div class="weather-update">
+                <span style="font-weight: 500;">Weather</span>
+                <span style="color: #D5682F;">Drizzling 🌧️</span>
+            </div>
+            <div class="weather-update">
+                <span style="font-weight: 500;">Cloud Cover</span>
+                <span style="color: #D5682F;">20%</span>
+            </div>
+            <div class="weather-update">
+                <span style="font-weight: 500;">Wind Speed</span>
+                <span style="color: #D5682F;">6 km/h</span>
             </div>
         </div>
-    </div>
 
-    <div class="content">
-        <div class="info-section">
-            <div class="info-header">
-                <div>Real Time Updates</div>
-                <div>Drizzling 🌧️</div>
-            </div>
-            <div>Sunset in 45 minutes</div>
-        </div>
-
-        <div class="action-buttons">
-            <button class="button">🔖 Rate</button>
-            <button class="button directions-button">📍 Directions</button>
-        </div>
-
-        <div class="review-text">
-            <p>amazing golden hour views at this nature spot 🌅🌲</p>
-            <p>as a sunset girlie, i literally fall in love with the little moments where i'm appreciating the sky painted in front of me 🌅</p>
-            <p>there are multiple ways that you can get here because the park has different entrances! but the best place to view the sunset is along the boardwalk that surrounds the water body in the middle.</p>
-            <p>to be more specific, you can head to the area called 'MacRitchie Reservoir View Point' as seen in pic number 2.</p>
-        </div>
-
-        <div class="rating-section">
-            <div class="rating">5.0 ⭐</div>
-            <div class="review-count">(50)</div>
-        </div>
-
-        <div class="user-reviews">
-            <h3>See others' rating 👀</h3>
-            
-            <div class="review-card">
-                <div class="review-header">
-                    <span class="username">@qwektsunyang</span>
-                    <span>⭐⭐⭐⭐⭐</span>
-                </div>
-                <p>Direction was useful and the spot is wonderful, highly encourage everyone to go 👍👍👍</p>
-            </div>
-
-            <div class="review-card">
-                <div class="review-header">
-                    <span class="username">@lolzzzyeeyee</span>
-                    <span>⭐⭐⭐⭐⭐</span>
-                </div>
-                <p>Enjoyed this tranquil walk. Amazing guide to this sunset spot in Singapore. Loved this.</p>
+        <!-- Reviews Section -->
+        <div class="reviews-section">
+            <h3>amazing golden hour views at this nature spot ✨🌅</h3  >
+            <p>as a sunset girlie, i literally fall in love with the little moments where i’m appreciating the sky painted in front of me 🥺<br><br></p>
+            <p>there are multiple ways that you can get here because the park has different entrances! but the best place to view the sunset is along the boardwalk that surrounds the water body in the middle.<br><br></p>
+            <p>to be more specific, you can head to the area called ‘MacRitchie Reservoir View Point’ as seen in pic number 2.<br><br></p>
+            <hr>
+            <h1>5.0 ⭐ (50)</h1>
+            <h2>See others' rating 👀</h2>
+            <hr>
+            <div class="review">
+                <p>@qwektsunyang</p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+                <p>direction was useful and the spot is wonderful, highly encourage everyone to go 🌅👍🏻</p>
                 <div class="review-images">
-                    <img src="/api/placeholder/100/100" alt="Review image 1" class="review-image">
-                    <img src="/api/placeholder/100/100" alt="Review image 2" class="review-image">
+                    <img src="/api/placeholder/100/100" alt="Review photo" class="review-image">
                 </div>
             </div>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="suggestions">
+            <h3>You may also like...</h3>
+            <div class="suggestion-cards">
+                <div class="suggestion-card">
+                    <img src="./src/images/lighthouse.jpg" alt="Another location" class="suggestion-image">
+                    <div class="suggestion-info">
+                        <p>📍 MacRitchie Reservoir Park</p>
+                        <p>amazing golden hour views at this nature spot 👀🌅</p>
+                        <p>5.0 ⭐</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Navigation -->
+        <div class="sticky-nav">
+            <button class="nav-button">🔖 Save</button>
+            <button class="nav-button">⭐ Rate</button>
+            <button class="nav-button">📍 Directions</button>
         </div>
     </div>
 </body>
